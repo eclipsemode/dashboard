@@ -51,7 +51,7 @@ const menulist: IMenuList[] = [
             {
                 id: 4,
                 title: 'Transactions',
-                path: '/dashboard/transactions',
+                path: '/dashboard/Transactions',
                 icon: <MdAttachMoney/>
             },
         ]

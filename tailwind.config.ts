@@ -16,6 +16,7 @@ const config: Config = {
         }
       },
       flex: {
+        3: '3',
         4: '4'
       }
     }
