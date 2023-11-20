@@ -1,6 +1,7 @@
 import React from 'react';
 import Sidebar from "@components/dashboard/Sidebar";
 import Navbar from "@components/dashboard/Navbar";
+import Footer from "@components/dashboard/Footer";
 
 interface IProps {
     children: React.ReactNode
@@ -15,6 +16,7 @@ const Layout = ({children}: IProps) => {
             <section className='flex-4 p-5'>
                 <Navbar/>
                 {children}
+                <Footer/>
             </section>
 
         </div>
