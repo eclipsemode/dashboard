@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from "next/image";
 import {IUser} from "@components/dashboard/Users";
+import Link from "next/link";
 
 const UserItem = ({image, id, created, role, status, email, name}: IUser) => {
     return (
@@ -15,9 +16,9 @@ const UserItem = ({image, id, created, role, status, email, name}: IUser) => {
             <td>{role}</td>
             <td>
                 <div className='flex gap-x-1.5'>
-                    <button className='text-xs bg-emerald-700 px-2.5 py-1 rounded-md w-fit'
-                            onClick={() => console.log(id)}>View
-                    </button>
+                    <Link href={`/dashboard/users/${id}`}>
+                    <button className='text-xs bg-emerald-700 px-2.5 py-1 rounded-md w-fit'>View</button>
+                    </Link>
                     <button className='text-xs bg-red-700 px-2.5 py-1 rounded-md w-fit'
                             onClick={() => console.log(id)}>Delete
                     </button>

@@ -20,4 +20,7 @@
     .custom-container {
         @apply bg-slate-300 dark:bg-dark-900 rounded-md p-5
     }
+    .custom-input {
+        @apply p-5 rounded-md bg-slate-100 dark:bg-dark-950
+    }
 }
