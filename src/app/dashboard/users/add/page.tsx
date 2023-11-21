@@ -1,8 +1,11 @@
 import React from 'react';
-import Users from "@components/dashboard/Users";
 
 const Page = () => {
-    return <Users/>
+    return (
+        <div>
+            
+        </div>
+    );
 };
 
 export default Page;

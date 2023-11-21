@@ -1,11 +1,8 @@
 import React from 'react';
+import Products from "@components/dashboard/Products";
 
 const Page = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+    return <Products/>
 };
 
 export default Page;
