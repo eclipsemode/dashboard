@@ -60,7 +60,7 @@ const usersArr: IProduct[] = [
 
 const Products = () => {
     return (
-        <div className='flex flex-col gap-y-2.5 bg-slate-300 dark:bg-dark-900 p-5 mt-5 rounded-md'>
+        <div className='flex flex-col gap-y-2.5 custom-container mt-5'>
             <div className='flex flex-row justify-between items-center'>
                 <Search placeholder='Search for a products'/>
                 <Link href='/dashboard/products/add'>

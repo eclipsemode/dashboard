@@ -56,7 +56,7 @@ const transactionsArr: ITransactionItem[] = [
 
 const Transactions = () => {
     return (
-        <div className='flex flex-col w-full bg-slate-300 dark:bg-dark-900 rounded-md p-5 gap-y-2.5'>
+        <div className='flex flex-col custom-container w-full gap-y-2.5'>
             <h2 className='text-2xl text-slate-500 dark:text-slate-400'>Latest Transactions</h2>
             <table className='border-separate border-spacing-3'>
                 <thead>

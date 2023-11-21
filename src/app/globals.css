@@ -15,3 +15,9 @@
         @apply decoration-0 text-dark-950 dark:text-slate-50
     }
 }
+
+@layer components {
+    .custom-container {
+        @apply bg-slate-300 dark:bg-dark-900 rounded-md p-5
+    }
+}

@@ -1,11 +1,8 @@
 import React from 'react';
+import AddUser from "@components/dashboard/Users/AddUser";
 
 const Page = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+    return <AddUser />
 };
 
 export default Page;

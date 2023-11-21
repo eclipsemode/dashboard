@@ -8,7 +8,7 @@ import Search from "@ui/Search";
 const Navbar = () => {
     const pathname = usePathname();
     return (
-        <section className='bg-slate-300 dark:bg-dark-900 flex justify-between items-center p-5 rounded-md'>
+        <section className='custom-container flex justify-between items-center'>
             <h1 className='font-medium text-slate-500 dark:text-slate-400 capitalize'>{pathname.split('/').at(-1)}</h1>
             <div className='flex gap-x-5 items-center'>
                 <Search placeholder='Search...'/>
