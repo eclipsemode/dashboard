@@ -5,7 +5,7 @@ interface IProps {
     name: string
 }
 
-const LogoBlock = ({name}: IProps) => {
+const LogoBlockUser = ({name}: IProps) => {
     return (
         <div className='flex flex-col gap-y-5 h-fit custom-container'>
             <div className='w-80 h-80 max-w-sm relative'>
@@ -16,4 +16,4 @@ const LogoBlock = ({name}: IProps) => {
     );
 };
 
-export default LogoBlock;
+export default LogoBlockUser;

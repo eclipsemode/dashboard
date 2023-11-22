@@ -1,5 +1,5 @@
 import React from 'react';
-import AddUser from "@components/dashboard/Users/AddUser";
+import AddUser from "@components/dashboard/users/AddUser";
 
 const Page = () => {
     return <AddUser />

@@ -2,7 +2,7 @@
 import React from 'react';
 import Search from "@ui/Search";
 import Link from "next/link";
-import ProductItem from "@components/dashboard/Products/ProductItem";
+import ProductItem from "@components/dashboard/products/ProductItem";
 import Pagination from "@components/dashboard/Pagination";
 
 export interface IProduct {

@@ -2,7 +2,7 @@
 import React from 'react';
 import Search from "@ui/Search";
 import Link from "next/link";
-import UserItem from "@components/dashboard/Users/UserItem/page";
+import UserItem from "@components/dashboard/users/UserItem/page";
 import Pagination from "@components/dashboard/Pagination";
 
 export interface IUser {

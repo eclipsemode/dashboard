@@ -1,23 +1,23 @@
 import React from 'react';
 import Image from "next/image";
-import {IUser} from "@components/dashboard/Users";
 import Link from "next/link";
+import {IProduct} from "@components/dashboard/products";
 
-const UserItem = ({image, id, created, role, status, email, name}: IUser) => {
+const ProductItem = ({id, title, description, created, price, stock, image}: IProduct) => {
     return (
         <tr>
             <td className='flex flex-row gap-x-1.5 items-center'>
                 <Image className='rounded-full' src={image} alt='logo' width={40} height={40}/>
-                {name}
+                {title}
             </td>
-            <td className='max-w-xs whitespace-nowrap overflow-hidden overflow-ellipsis'>{email}</td>
-            <td>{status}</td>
+            <td className='max-w-xs whitespace-nowrap overflow-hidden overflow-ellipsis'>{description}</td>
+            <td>${price}</td>
             <td>{created.toDateString()}</td>
-            <td>{role}</td>
+            <td>{stock}</td>
             <td>
                 <div className='flex gap-x-1.5'>
-                    <Link href={`/dashboard/users/${id}`}>
-                    <button className='text-xs bg-emerald-700 px-2.5 py-1 rounded-md w-fit'>View</button>
+                    <Link href={`/dashboard/products/${id}`}>
+                        <button className='text-xs bg-emerald-700 px-2.5 py-1 rounded-md w-fit'>View</button>
                     </Link>
                     <button className='text-xs bg-red-700 px-2.5 py-1 rounded-md w-fit'
                             onClick={() => console.log(id)}>Delete
@@ -28,4 +28,4 @@ const UserItem = ({image, id, created, role, status, email, name}: IUser) => {
     );
 };
 
-export default UserItem;
+export default ProductItem;

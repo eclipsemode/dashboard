@@ -4,7 +4,7 @@ interface IProps {
     name: string
 }
 
-const FormBlock = ({name}: IProps) => {
+const FormBlockUser = ({name}: IProps) => {
     return (
         <div className='flex-1 flex flex-col gap-y-5 custom-container'>
             <label className='flex flex-col gap-y-2.5' htmlFor="formBlock_name">
@@ -60,4 +60,4 @@ const FormBlock = ({name}: IProps) => {
     );
 };
 
-export default FormBlock;
+export default FormBlockUser;

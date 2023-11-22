@@ -12,21 +12,21 @@ export interface ICardItem {
 const cardItem: ICardItem[] = [
     {
         id: 1,
-        title: 'Total Users',
+        title: 'Total users',
         amount: 10928,
         percent: 12,
         text: 'more than previous week'
     },
     {
         id: 2,
-        title: 'Total Users',
+        title: 'Total users',
         amount: 10928,
         percent: 12,
         text: 'more than previous week'
     },
     {
         id: 3,
-        title: 'Total Users',
+        title: 'Total users',
         amount: 10928,
         percent: 12,
         text: 'more than previous week'
