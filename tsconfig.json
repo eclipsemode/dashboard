@@ -23,7 +23,8 @@
     "paths": {
       "@app/*": ["./src/app/*"],
       "@components/*": ["./src/components/*"],
-      "@ui/*": ["./src/ui/*"]
+      "@ui/*": ["./src/ui/*"],
+      "@prisma/*": ["./prisma/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

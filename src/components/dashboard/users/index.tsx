@@ -7,36 +7,22 @@ import Pagination from "@components/dashboard/Pagination";
 
 export interface IUser {
     id: number,
-    image: string,
-    name: string,
+    username: string,
     email: string,
-    status: 'active' | 'inactive',
-    created: Date,
-    role: 'client' | 'admin',
+    password?: string,
+    phone?: string,
+    role: string,
+    createdAt: Date,
+    isActive: boolean,
+    address?: string
+
 }
 
-const usersArr: IUser[] = [
-    {
-        id: 1,
-        image: '/noavatar.png',
-        name: 'John',
-        email: 'test@mail.ru',
-        status: 'active',
-        created: new Date(),
-        role: 'client'
-    },
-    {
-        id: 2,
-        image: '/noavatar.png',
-        name: 'Frank',
-        email: 'test2@mail.ru',
-        status: 'active',
-        created: new Date(),
-        role: 'admin'
-    },
-]
+interface IProps {
+    users: IUser[]
+}
 
-const Users = () => {
+const Users = ({users}: IProps) => {
     return (
         <div className='flex flex-col gap-y-2.5 custom-container mt-5'>
             <div className='flex flex-row justify-between items-center'>
@@ -59,8 +45,8 @@ const Users = () => {
                 </thead>
                 <tbody>
                 {
-                    usersArr.map(user => <UserItem key={user.id} status={user.status} created={user.created}
-                                                   email={user.email} id={user.id} image={user.image} name={user.name}
+                    users.map(user => <UserItem key={user.id} isActive={user.isActive} createdAt={user.createdAt}
+                                                   email={user.email} id={user.id} username={user.username}
                                                    role={user.role}/>)
                 }
                 </tbody>
