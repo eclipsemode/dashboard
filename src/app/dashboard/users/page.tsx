@@ -3,18 +3,17 @@ import Users, {IUser} from "@components/dashboard/users";
 import prisma from "@prisma/prisma";
 
 const fetchUsers = async (): Promise<IUser[]> => {
-    const response = await prisma.user.findMany({
-
-    });
-    if (response) {
-        return response;
+    try {
+        const users = await prisma.user.findMany();
+        return users;
+    } catch (e) {
+        throw new Error('Fetch users error!')
     }
-    return [];
 }
 
 const Page = async () => {
-    const res = await fetchUsers();
-    return <Users users={res}/>
+    const users = await fetchUsers();
+    return <Users users={users}/>
 };
 
 export default Page;

@@ -3,12 +3,14 @@ import Image from "next/image";
 import {IUser} from "@components/dashboard/users";
 import {useRouter} from "next/navigation";
 
-const UserItem = ({id, createdAt, role, isActive, email, username}: IUser) => {
+const defaultImagePath = '/noavatar.png';
+
+const UserItem = ({id, image, createdAt, role, isActive, email, username}: IUser) => {
     const router = useRouter();
     return (
         <tr>
             <td className='flex flex-row gap-x-1.5 items-center'>
-                <Image className='rounded-full' src='/noavatar.png' alt='logo' width={40} height={40}/>
+                <Image className='rounded-full' src={image || defaultImagePath} alt='logo' width={40} height={40}/>
                 {username}
             </td>
             <td className='max-w-xs whitespace-nowrap overflow-hidden overflow-ellipsis'>{email}</td>

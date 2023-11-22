@@ -8,6 +8,7 @@ import Pagination from "@components/dashboard/Pagination";
 export interface IUser {
     id: number,
     username: string,
+    image?: string,
     email: string,
     password?: string,
     phone?: string,
