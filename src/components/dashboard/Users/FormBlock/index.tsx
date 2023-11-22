@@ -54,7 +54,7 @@ const FormBlock = ({name}: IProps) => {
                     <option value="yes">Yes</option>
                 </select>
             </label>
-            <button className='w-full p-5 text-slate-50 bg-teal-500 dark:bg-teal-700 rounded-md' type='submit'>Update
+            <button className='custom-button-apply' type='submit'>Update
             </button>
         </div>
     );

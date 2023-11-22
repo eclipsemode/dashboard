@@ -17,7 +17,7 @@ const AddProduct = () => {
                 <input type="text" placeholder='Color' name='color' className='w-[calc(50%-20px)] p-5 rounded-md bg-slate-100 dark:bg-dark-950'/>
                 <input type="text" placeholder='Size' name='size' className='w-[calc(50%-20px)] p-5 rounded-md bg-slate-100 dark:bg-dark-950'/>
                 <textarea name="description" id="description" cols={30} rows={10} placeholder='Description' className='w-full p-5 rounded-md bg-slate-100 dark:bg-dark-950'></textarea>
-                <button className='w-full p-5 text-slate-50 bg-teal-500 dark:bg-teal-700 rounded-md' type='submit'>Submit</button>
+                <button className='custom-button-apply' type='submit'>Submit</button>
             </form>
         </div>
     );

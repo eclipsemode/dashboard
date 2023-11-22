@@ -23,4 +23,7 @@
     .custom-input {
         @apply p-5 rounded-md bg-slate-100 dark:bg-dark-950
     }
+    .custom-button-apply {
+        @apply w-full p-5 text-slate-50 bg-teal-500 dark:bg-teal-700 rounded-md
+    }
 }

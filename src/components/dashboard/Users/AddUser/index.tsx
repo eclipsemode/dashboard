@@ -19,7 +19,7 @@ const AddUser = () => {
                     <option value="phone">No</option>
                 </select>
                 <textarea name="address" id="address" cols={30} rows={10} placeholder='Address' className='w-full p-5 rounded-md bg-slate-100 dark:bg-dark-950'></textarea>
-                <button className='w-full p-5 text-slate-50 bg-teal-500 dark:bg-teal-700 rounded-md' type='submit'>Submit</button>
+                <button className='custom-button-apply' type='submit'>Submit</button>
             </form>
         </div>
     );

@@ -1,3 +1,4 @@
+'use client'
 import React, {ReactElement} from 'react';
 import {
     MdAnalytics,
@@ -11,6 +12,7 @@ import {
 import {IconType} from "react-icons";
 import MenuLink from "@components/dashboard/Sidebar/MenuLink";
 import Image from "next/image";
+import {useRouter} from "next/navigation";
 
 export interface IMenuItem {
     id: number,
@@ -101,6 +103,7 @@ const menulist: IMenuList[] = [
 ]
 
 const Sidebar = () => {
+    const router = useRouter();
     return (
         <>
             <div className='flex flex-row gap-x-5 items-center mb-5'>
@@ -120,7 +123,7 @@ const Sidebar = () => {
                     </li>
                 ))}
                 <li>
-                    <button className='flex items-center w-full gap-x-1.5 p-5 mt-1.5 mb-1.5 hover:bg-slate-400 dark:hover:bg-dark-950 rounded-md'>
+                    <button onClick={() => router.push('/')} className='flex items-center w-full gap-x-1.5 p-5 mt-1.5 mb-1.5 hover:bg-slate-400 dark:hover:bg-dark-950 rounded-md'>
                         <MdLogout/>
                         Logout
                     </button>
