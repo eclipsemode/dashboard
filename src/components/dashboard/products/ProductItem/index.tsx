@@ -12,7 +12,7 @@ const ProductItem = ({id, title, description, created, price, stock, image}: IPr
             </td>
             <td className='max-w-xs whitespace-nowrap overflow-hidden overflow-ellipsis'>{description}</td>
             <td>${price}</td>
-            <td>{created.toDateString()}</td>
+            <td>{new Date(created).toDateString()}</td>
             <td>{stock}</td>
             <td>
                 <div className='flex gap-x-1.5'>

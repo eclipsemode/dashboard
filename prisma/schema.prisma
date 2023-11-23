@@ -13,7 +13,7 @@ datasource db {
 model User {
   id        Int      @id @default(autoincrement())
   username  String   @unique
-  image     String
+  image     String   @default("/noavatar.png")
   email     String   @unique
   password  String
   phone     String
@@ -23,4 +23,16 @@ model User {
   address   String
 
   @@map("users")
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  image       String   @default("/noproduct.jpg")
+  title       String   @unique
+  description String   @default("")
+  price       Int
+  created     DateTime @default(now())
+  stock       Int
+
+  @@map("products")
 }

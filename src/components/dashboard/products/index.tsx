@@ -36,29 +36,12 @@ const productsArr: IProduct[] = [
     },
 ]
 
-const usersArr: IProduct[] = [
-    {
-        id: 1,
-        image: '/noproduct.jpg',
-        title: 'iPhone',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, itaque!',
-        price: 150,
-        created: new Date(),
-        stock: 25
-    },
-    {
-        id: 2,
-        image: '/noproduct.jpg',
-        title: 'Samsung',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, itaque!',
-        price: 150,
-        created: new Date(),
-        stock: 25
-    }
-]
+interface IProps {
+    products: IProduct[]
+}
 
 
-const Products = () => {
+const Products = ({products}: IProps) => {
     return (
         <div className='flex flex-col gap-y-2.5 custom-container mt-5'>
             <div className='flex flex-row justify-between items-center'>
@@ -81,7 +64,7 @@ const Products = () => {
                 </thead>
                 <tbody>
                 {
-                    productsArr.map(product => <ProductItem key={product.id} description={product.description}
+                    products.map(product => <ProductItem key={product.id} description={product.description}
                                                             created={product.created}
                                                             stock={product.stock} id={product.id} image={product.image}
                                                             title={product.title}

@@ -1,18 +1,17 @@
 import React from 'react';
 import Users, {IUser} from "@components/dashboard/users";
-import prisma from "@prisma/prisma";
 
-const fetchUsers = async (): Promise<IUser[]> => {
+const fetchUsers = async () => {
     try {
-        const users = await prisma.user.findMany();
-        return users;
+        const users = await fetch(`${process.env.LOCAL_PATH}/api/users`);
+        return users.json();
     } catch (e) {
-        throw new Error('Fetch users error!')
+        console.error(e);
     }
 }
 
 const Page = async () => {
-    const users = await fetchUsers();
+    const users = await fetchUsers() as unknown as IUser[];
     return <Users users={users}/>
 };
 

@@ -15,7 +15,7 @@ const UserItem = ({id, image, createdAt, role, isActive, email, username}: IUser
             </td>
             <td className='max-w-xs whitespace-nowrap overflow-hidden overflow-ellipsis'>{email}</td>
             <td>{isActive ? 'active' : 'not activated'}</td>
-            <td>{createdAt.toDateString()}</td>
+            <td>{new Date(createdAt).toDateString()}</td>
             <td>{role}</td>
             <td>
                 <div className='flex items-center gap-x-1.5'>
