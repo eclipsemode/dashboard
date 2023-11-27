@@ -1,33 +1,46 @@
-import { PrismaClient } from '@prisma/client'
+import {PrismaClient} from '@prisma/client'
+import {usersMock} from "./data/usersMock";
+import {productsMock} from "./data/productsMock";
+
 const prisma = new PrismaClient()
 async function main() {
-    const admin = await prisma.user.upsert({
-        where: { email: 'admin@dashboard.com' },
-        update: {},
-        create: {
-            username: 'admin',
-            image: '/noavatar.png',
-            email: 'admin@dashboard.com',
-            password: '12345678',
-            phone: '89180000000',
-            role: 'admin',
-            isActive: true,
-            address: 'no address'
-        },
+    const usersPromises = usersMock.map((user) => {
+        return prisma.user.upsert({
+            where: {email: user.email},
+            update: {},
+            create: {
+                username: user.username,
+                image: user.image,
+                email: user.email,
+                password: user.password,
+                phone: user.phone,
+                role: user.role,
+                isActive: user.isActive,
+                address: user.address
+            }
+        })
     })
 
-    const product = await prisma.product.upsert({
-        where: {id: 1},
-        update: {},
-        create: {
-            title: 'iPhone 15',
-            price: 1200,
-            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, itaque!',
-            stock: 27
-        }
+    const usersCreated = await Promise.all(usersPromises);
+
+    const productsPromises = productsMock.map((product) => {
+        return prisma.product.upsert({
+            where: {title: product.title},
+            update: {},
+            create: {
+                title: product.title,
+                price: product.price,
+                description: product.description,
+                stock: product.stock
+            }
+        })
     })
-    console.log({ admin, product })
+
+    const productsCreated = Promise.all(productsPromises);
+
+    console.log({usersCreated, productsCreated})
 }
+
 main()
     .then(async () => {
         await prisma.$disconnect()

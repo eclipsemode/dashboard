@@ -1,5 +1,6 @@
 import React from 'react';
 import Products, {IProduct} from "@components/dashboard/products";
+import {revalidatePath} from "next/cache";
 
 const fetchProducts = async (query: string) => {
     try {
@@ -18,6 +19,7 @@ interface ISearchParamsWithQuery {
 
 const Page = async ({searchParams}: ISearchParamsWithQuery) => {
     const products = await fetchProducts(searchParams.query) as unknown as IProduct[];
+    revalidatePath('/dashboard/products');
     return <Products products={products}/>
 };
 

@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Login = () => {
+
     return (
         <div className='h-screen flex justify-center items-center px-5'>
             <div className='flex flex-col gap-y-5 custom-container max-w-md w-full'>

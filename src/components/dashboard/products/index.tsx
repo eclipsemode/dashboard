@@ -3,7 +3,7 @@ import React, {ChangeEvent, useState} from 'react';
 import Search from "@ui/Search";
 import Link from "next/link";
 import ProductItem from "@components/dashboard/products/ProductItem";
-import Pagination from "@components/dashboard/Pagination";
+import Pagination from "@ui/Pagination";
 import Skeleton from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css'
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
@@ -54,6 +54,7 @@ const Products = ({products}: IProps) => {
     const handleInput = useDebouncedCallback((e: ChangeEvent<HTMLInputElement>) => {
         setLoading(true);
         const params = new URLSearchParams(searchParams);
+        params.set('page', '1');
         if (e.target.value) {
             params.set('query', e.target.value);
         } else {

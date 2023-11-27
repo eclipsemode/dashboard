@@ -3,11 +3,11 @@ import React, {ChangeEvent, useState} from 'react';
 import Search from "@ui/Search";
 import Link from "next/link";
 import UserItem from "@components/dashboard/users/UserItem/page";
-import Pagination from "@components/dashboard/Pagination";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import {useDebouncedCallback} from "use-debounce";
 import Skeleton from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css'
+import PaginationUsers from "@components/dashboard/users/PaginationUsers";
 
 export interface IUser {
     id: number,
@@ -36,6 +36,7 @@ const Users = ({users}: IProps) => {
     const handleInput = useDebouncedCallback((e: ChangeEvent<HTMLInputElement>) => {
         setLoading(true);
         const params = new URLSearchParams(searchParams);
+        params.set('page', '1');
         if (e.target.value) {
             params.set('query', e.target.value);
         } else {
@@ -55,7 +56,8 @@ const Users = ({users}: IProps) => {
 
     const renderSkeleton = () => (
         <tr>
-            <td colSpan={6}><Skeleton count={6} height={42} className='opacity-20 dark:opacity-40 [&:not(:first-child)]:mt-2.5'/></td>
+            <td colSpan={6}><Skeleton count={6} height={42}
+                                      className='opacity-20 dark:opacity-40 [&:not(:first-child)]:mt-2.5'/></td>
         </tr>
     )
 
@@ -90,9 +92,7 @@ const Users = ({users}: IProps) => {
                 </tbody>
                 <tfoot>
                 <tr>
-                    <td colSpan={6}><Pagination previousButtonDisabled={true} nextButtonDisabled={false}
-                                                onPreviousClick={() => console.log('prev')}
-                                                onNextClick={() => console.log('next')}/></td>
+                    <td colSpan={6}><PaginationUsers/></td>
                 </tr>
                 </tfoot>
             </table>
