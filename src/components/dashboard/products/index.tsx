@@ -1,9 +1,13 @@
 'use client'
-import React from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import Search from "@ui/Search";
 import Link from "next/link";
 import ProductItem from "@components/dashboard/products/ProductItem";
 import Pagination from "@components/dashboard/Pagination";
+import Skeleton from "react-loading-skeleton";
+import 'react-loading-skeleton/dist/skeleton.css'
+import {usePathname, useRouter, useSearchParams} from "next/navigation";
+import {useDebouncedCallback} from "use-debounce";
 
 export interface IProduct {
     id: number,
@@ -42,10 +46,42 @@ interface IProps {
 
 
 const Products = ({products}: IProps) => {
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+    const [loading, setLoading] = useState<boolean>(true);
+    const {replace} = useRouter();
+
+    const handleInput = useDebouncedCallback((e: ChangeEvent<HTMLInputElement>) => {
+        setLoading(true);
+        const params = new URLSearchParams(searchParams);
+        if (e.target.value) {
+            params.set('query', e.target.value);
+        } else {
+            params.delete('query');
+        }
+
+        replace(`${pathname}?${params}`);
+    }, 500)
+
+    const disableLoadingWithDebounce = useDebouncedCallback(() => {
+        setLoading(false)
+    }, 300)
+
+    React.useEffect(() => {
+        disableLoadingWithDebounce();
+    }, [products])
+
+    const renderSkeleton = () => (
+        <tr>
+            <td colSpan={6}><Skeleton count={6} height={42}
+                                      className='opacity-20 dark:opacity-40 [&:not(:first-child)]:mt-2.5'/></td>
+        </tr>
+    )
+
     return (
         <div className='flex flex-col gap-y-2.5 custom-container mt-5'>
             <div className='flex flex-row justify-between items-center'>
-                <Search placeholder='Search for a products'/>
+                <Search inputEvent={handleInput} placeholder='Search for a products'/>
                 <Link href='/dashboard/products/add'>
                     <button className='text-sm bg-slate-400 dark:bg-indigo-900 px-2.5 py-1.5 rounded-md w-fit'>Add New
                     </button>
@@ -64,15 +100,22 @@ const Products = ({products}: IProps) => {
                 </thead>
                 <tbody>
                 {
-                    products.map(product => <ProductItem key={product.id} description={product.description}
-                                                            created={product.created}
-                                                            stock={product.stock} id={product.id} image={product.image}
-                                                            title={product.title}
-                                                            price={product.price}/>)
+                    loading
+                        ? renderSkeleton()
+                        : products.map(product => <ProductItem key={product.id} description={product.description}
+                                                               created={product.created}
+                                                               stock={product.stock} id={product.id}
+                                                               image={product.image}
+                                                               title={product.title}
+                                                               price={product.price}/>)
                 }
                 </tbody>
                 <tfoot>
-                <tr><td colSpan={6}><Pagination previousButtonDisabled={true} nextButtonDisabled={false} onPreviousClick={() => console.log('prev')} onNextClick={() => console.log('next')}/></td></tr>
+                <tr>
+                    <td colSpan={6}><Pagination previousButtonDisabled={true} nextButtonDisabled={false}
+                                                onPreviousClick={() => console.log('prev')}
+                                                onNextClick={() => console.log('next')}/></td>
+                </tr>
                 </tfoot>
             </table>
         </div>
