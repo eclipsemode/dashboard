@@ -1,6 +1,7 @@
 'use client'
 import React from 'react';
 import {ThemeProvider} from "next-themes";
+import {SkeletonTheme} from "react-loading-skeleton";
 
 interface IProps {
     children: React.ReactNode
@@ -9,7 +10,9 @@ interface IProps {
 const Providers = ({children}: IProps) => {
     return (
         <ThemeProvider attribute='class'>
-            {children}
+            <SkeletonTheme baseColor="#202020" highlightColor="#444">
+                {children}
+            </SkeletonTheme>
         </ThemeProvider>
     );
 };

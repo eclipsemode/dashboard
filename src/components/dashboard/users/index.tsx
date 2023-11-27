@@ -1,11 +1,13 @@
 'use client'
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import Search from "@ui/Search";
 import Link from "next/link";
 import UserItem from "@components/dashboard/users/UserItem/page";
 import Pagination from "@components/dashboard/Pagination";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import {useDebouncedCallback} from "use-debounce";
+import Skeleton from "react-loading-skeleton";
+import 'react-loading-skeleton/dist/skeleton.css'
 
 export interface IUser {
     id: number,
@@ -28,9 +30,11 @@ interface IProps {
 const Users = ({users}: IProps) => {
     const searchParams = useSearchParams();
     const pathname = usePathname();
-    const { replace } = useRouter();
+    const [loading, setLoading] = useState<boolean>(true);
+    const {replace} = useRouter();
 
     const handleInput = useDebouncedCallback((e: ChangeEvent<HTMLInputElement>) => {
+        setLoading(true);
         const params = new URLSearchParams(searchParams);
         if (e.target.value) {
             params.set('query', e.target.value);
@@ -40,6 +44,20 @@ const Users = ({users}: IProps) => {
 
         replace(`${pathname}?${params}`);
     }, 500)
+
+    const disableLoadingWithDebounce = useDebouncedCallback(() => {
+        setLoading(false)
+    }, 300)
+
+    React.useEffect(() => {
+        disableLoadingWithDebounce();
+    }, [users])
+
+    const renderSkeleton = () => (
+        <tr>
+            <td colSpan={6}><Skeleton count={6} height={42} className='opacity-20 dark:opacity-40 [&:not(:first-child)]:mt-2.5'/></td>
+        </tr>
+    )
 
     return (
         <div className='flex flex-col gap-y-2.5 custom-container mt-5'>
@@ -63,13 +81,19 @@ const Users = ({users}: IProps) => {
                 </thead>
                 <tbody>
                 {
-                    users.map(user => <UserItem key={user.id} isActive={user.isActive} createdAt={user.createdAt}
-                                                   email={user.email} id={user.id} username={user.username}
-                                                   role={user.role}/>)
+                    loading
+                        ? renderSkeleton()
+                        : users.map(user => <UserItem key={user.id} isActive={user.isActive} createdAt={user.createdAt}
+                                                      email={user.email} id={user.id} username={user.username}
+                                                      role={user.role}/>)
                 }
                 </tbody>
                 <tfoot>
-                <tr><td colSpan={6}><Pagination previousButtonDisabled={true} nextButtonDisabled={false} onPreviousClick={() => console.log('prev')} onNextClick={() => console.log('next')}/></td></tr>
+                <tr>
+                    <td colSpan={6}><Pagination previousButtonDisabled={true} nextButtonDisabled={false}
+                                                onPreviousClick={() => console.log('prev')}
+                                                onNextClick={() => console.log('next')}/></td>
+                </tr>
                 </tfoot>
             </table>
         </div>
