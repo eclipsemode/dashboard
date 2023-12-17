@@ -8,6 +8,7 @@ import {useDebouncedCallback} from "use-debounce";
 import Skeleton from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css'
 import PaginationUsers from "@components/dashboard/users/PaginationUsers";
+import {IFetchUsers} from "@app/dashboard/users/page";
 
 export interface IUser {
     id: number,
@@ -23,15 +24,19 @@ export interface IUser {
 
 }
 
-interface IProps {
-    users: IUser[]
+interface IProps extends IFetchUsers {
 }
 
-const Users = ({users}: IProps) => {
+const Users = ({users, usersAmount, take}: IProps) => {
+    const router = useRouter();
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const [loading, setLoading] = useState<boolean>(true);
     const {replace} = useRouter();
+
+    React.useEffect(() => {
+        replace(pathname);
+    }, [])
 
     const handleInput = useDebouncedCallback((e: ChangeEvent<HTMLInputElement>) => {
         setLoading(true);
@@ -56,7 +61,7 @@ const Users = ({users}: IProps) => {
 
     const renderSkeleton = () => (
         <tr>
-            <td colSpan={6}><Skeleton count={6} height={42}
+            <td colSpan={6}><Skeleton count={take} height={42}
                                       className='opacity-20 dark:opacity-40 [&:not(:first-child)]:mt-2.5'/></td>
         </tr>
     )
@@ -92,7 +97,7 @@ const Users = ({users}: IProps) => {
                 </tbody>
                 <tfoot>
                 <tr>
-                    <td colSpan={6}><PaginationUsers/></td>
+                    <td colSpan={6}><PaginationUsers usersAmount={usersAmount} take={take} /></td>
                 </tr>
                 </tfoot>
             </table>

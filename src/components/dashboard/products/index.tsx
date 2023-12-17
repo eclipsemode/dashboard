@@ -3,11 +3,12 @@ import React, {ChangeEvent, useState} from 'react';
 import Search from "@ui/Search";
 import Link from "next/link";
 import ProductItem from "@components/dashboard/products/ProductItem";
-import Pagination from "@ui/Pagination";
 import Skeleton from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css'
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import {useDebouncedCallback} from "use-debounce";
+import {IFetchProducts} from "@app/dashboard/products/page";
+import PaginationProducts from "@components/dashboard/products/PaginationProducts";
 
 export interface IProduct {
     id: number,
@@ -19,37 +20,19 @@ export interface IProduct {
     stock: number,
 }
 
-const productsArr: IProduct[] = [
-    {
-        id: 1,
-        image: '/noproduct.jpg',
-        title: 'iPhone',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, vel?',
-        price: 1200,
-        created: new Date(),
-        stock: 24
-    },
-    {
-        id: 2,
-        image: '/noproduct.jpg',
-        title: 'Samsung',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, vel?',
-        price: 800,
-        created: new Date(),
-        stock: 42
-    },
-]
-
-interface IProps {
-    products: IProduct[]
+interface IProps extends IFetchProducts {
 }
 
 
-const Products = ({products}: IProps) => {
+const Products = ({products, productsAmount, take}: IProps) => {
     const pathname = usePathname();
     const searchParams = useSearchParams();
     const [loading, setLoading] = useState<boolean>(true);
     const {replace} = useRouter();
+
+    React.useEffect(() => {
+        replace(pathname);
+    }, [])
 
     const handleInput = useDebouncedCallback((e: ChangeEvent<HTMLInputElement>) => {
         setLoading(true);
@@ -74,7 +57,7 @@ const Products = ({products}: IProps) => {
 
     const renderSkeleton = () => (
         <tr>
-            <td colSpan={6}><Skeleton count={6} height={42}
+            <td colSpan={6}><Skeleton count={take} height={42}
                                       className='opacity-20 dark:opacity-40 [&:not(:first-child)]:mt-2.5'/></td>
         </tr>
     )
@@ -113,9 +96,7 @@ const Products = ({products}: IProps) => {
                 </tbody>
                 <tfoot>
                 <tr>
-                    <td colSpan={6}><Pagination previousButtonDisabled={true} nextButtonDisabled={false}
-                                                onPreviousClick={() => console.log('prev')}
-                                                onNextClick={() => console.log('next')}/></td>
+                    <td colSpan={6}><PaginationProducts productsAmount={productsAmount} take={take} /></td>
                 </tr>
                 </tfoot>
             </table>
